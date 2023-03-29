@@ -1,0 +1,32 @@
+:root {
+	--landingGridWidth: var(--wrapper, min(1600px, 92vw));
+	--landingGridGutter: var(--gutter, min(60px, 4vw));
+	--landingGridColumn: calc((var(--landingGridWidth) - 11 * var(--landingGridGutter)) / 12);
+	--landingGridMargin: calc((100vw - var(--landingGridWidth)) / 2);
+}
+
+.wrapper {
+	position: relative;
+	margin: 0 auto;
+	width: var(--landingGridWidth);
+	display: flex;
+}
+
+.column {
+	box-sizing: border-box;
+	flex: 1 0 calc(var(--landingGridColumn) * var(--column) + calc(var(--column) - 1) * var(--landingGridGutter));
+	margin-left: calc(var(--landingGridColumn) * var(--offset, 0) + calc(var(--offset, 0) - 1) * var(--landingGridGutter) + var(--landingGridGutter));
+	margin-right: var(--landingGridGutter);
+
+	&:not(.column--infinite) {
+		max-width: calc(var(--landingGridColumn) * var(--column) + calc(var(--column) - 1) * var(--landingGridGutter));
+	}
+
+	&--infinite {
+		flex: 1 0 calc(calc(var(--landingGridColumn) * var(--column) + calc(var(--column) - 1) * var(--landingGridGutter)) + var(--landingGridMargin));
+
+		&:first-of-type {
+			margin-left: calc(var(--landingGridMargin) * -1);
+		}
+	}
+}
